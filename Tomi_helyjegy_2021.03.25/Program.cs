@@ -50,6 +50,74 @@ namespace Tomi_helyjegy_2021._03._25
                     Console.Write(adatok[i].ulesszam+" ");
                 }
             }
+
+            //4
+            int szorzat = 0;
+            int tavolsag = 0;
+            for (int i=0;i<n;i++)
+            {
+                tavolsag = megtettavolsag(adatok[i].megtett_tavolsag);
+                szorzat += ertek(tavolsag * 71);              
+            }
+            Console.WriteLine("\n4.Feladat:\n" +szorzat+" forint bevétele volt.");
+
+            //5
+            int kmtolmax = 0;
+            for (int i=0;i<n;i++)
+            {
+                if (adatok[i].kmtol>kmtolmax)
+                {
+                    kmtolmax = adatok[i].kmtol;
+                }
+            }
+            int le = 0;
+            int fel = 0;
+            for (int i =0;i<n;i++)
+            {
+                if (kmtolmax== adatok[i].kmig)
+                {
+                    le++;
+                }
+                if (kmtolmax==adatok[i].kmtol)
+                {
+                    fel++;
+                }
+            }
+            Console.WriteLine($"5.Feladat:\n{le} ember szállt le és {fel} ember szállt fel.");
+
+            //6
+            int[] megallohelyek = new int[n];
+            for (int i = 0;i<n;i++)
+            {
+
+                int j = 0;
+                while (j<=i)
+                {
+                    if (adatok[i].kmtol == megallohelyek[j])
+                    {                       
+                        j++;
+                    }
+                    else
+                    {
+                        megallohelyek[j] = adatok[i].kmtol; ;
+                    }
+
+                    /*if (adatok[i].kmig != megallohelyek[j])
+                    {
+                        megallohelyek[j] = adatok[i].kmig;
+                    }
+                    else
+                    {
+                        j++;
+                    }*/
+                }
+                
+            }
+
+            for (int i=0;i<n;i++)
+            {
+                Console.Write($"{megallohelyek[i]} ");
+            }
             Console.ReadKey();
         }
 

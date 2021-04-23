@@ -85,31 +85,30 @@ namespace Tomi_helyjegy_2021._03._25
             }
             Console.WriteLine($"5.Feladat:\n{le} ember szállt le és {fel} ember szállt fel.");
 
-            //6
-            int[] megallohelyek = new int[n];
+            //6.feladat
+            /*int[] megallohelyek = new int[n];
+            int k = 0;
             for (int i = 0;i<n;i++)
             {
-
+                bool volt = true;
                 int j = 0;
                 while (j<=i)
                 {
-                    if (adatok[i].kmtol == megallohelyek[j])
-                    {                       
-                        j++;
-                    }
-                    else
+                    if (adatok[i].kmtol == megallohelyek[j] || adatok[i].kmig == megallohelyek)
                     {
-                        megallohelyek[j] = adatok[i].kmtol; ;
+                        megallohelyek[j] = adatok[i].kmig;
+                        k++;
                     }
+                    j++;
 
-                    /*if (adatok[i].kmig != megallohelyek[j])
+                    if (adatok[i].kmig != megallohelyek[j])
                     {
                         megallohelyek[j] = adatok[i].kmig;
                     }
                     else
                     {
                         j++;
-                    }*/
+                    }
                 }
                 
             }
@@ -117,7 +116,76 @@ namespace Tomi_helyjegy_2021._03._25
             for (int i=0;i<n;i++)
             {
                 Console.Write($"{megallohelyek[i]} ");
+            }*/
+
+            //6.feladat: Megoldásom
+            bool[] megallohelyek = new bool[173];
+            for (int i = 0; i<megallohelyek.Length;i++)
+            {
+                megallohelyek[adatok[i].kmtol] = true;
+                megallohelyek[adatok[i].kmig] = true;
+                //Console.Write(megallohelyek[i] + " ");
             }
+            int szamol = 0;
+            for (int i = 0;i<megallohelyek.Length;i++)
+            {
+                if (megallohelyek[i] == true)
+                {
+                    szamol++;
+                    //Console.Write(i + " ");
+                }
+            }
+            Console.WriteLine($"6.feladat\nA megállóhelyek száma: {szamol - 2}");
+
+            //7.feladat
+            int[] megallo = new int[szamol];
+            int j = 0;
+            for (int i = 0; i < megallohelyek.Length; i++)
+            {
+                if (megallohelyek[i] == true)
+                {
+                    megallo[j] = i;
+                    Console.Write(megallo[j] + " ");
+                    j++;
+                }                               
+            }
+            Console.Write("Kérem adja meg a pillanatfelvételt km-ben: ");
+            int pillanat = int.Parse(Console.ReadLine());
+            int idealis_megallo = 0;
+            for (int i = 0;i<megallo.Length-1;i++)
+            {
+                if (pillanat > megallo[i] && pillanat <= megallo[i + 1])
+                {
+                    idealis_megallo = megallo[i + 1];
+                }
+            }
+            Console.WriteLine(idealis_megallo);
+            int[] kesz = new int[173];
+            j = 0;
+            for (int i = 0;i<n;i++)
+            {
+                if (idealis_megallo < adatok[i].kmig && idealis_megallo > adatok[i].kmtol)
+                {
+                    Console.Write(adatok[i].ulesszam+" ");
+                    kesz[j] = adatok[i].ulesszam;
+                }
+            }
+            //Rendezett kiírás
+            Console.WriteLine();
+            for (int k = 1;k<200;k++)
+            {
+                for (int i = 0; i < kesz.Length; i++)
+                {
+                    if(kesz[i] != 0)
+                    {
+                        if(kesz[i] == k)
+                        {
+                            Console.Write(k+" ");
+                        }
+                    }
+                }
+            }
+            
             Console.ReadKey();
         }
 
